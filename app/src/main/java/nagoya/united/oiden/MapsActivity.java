@@ -135,7 +135,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // ビューを生成
         // 例として、TextViewに動的にテキストを入れる
         View v = LayoutInflater.from(this).inflate(R.layout.map_item, null);
-        TextView tv = (TextView)v.findViewById(R.id.text110);
+        TextView tv = (TextView)v.findViewById(R.id.message);
         tv.setText("ここに動的にテキストを入れる");
 
         // 画面内に配置してないので、measureを読んでからBitmapに書き込む
@@ -157,7 +157,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double lng = location.getLongitude();
         LatLng newLocation = new LatLng(lat, lng);
         mMap.addMarker(new MarkerOptions().position(newLocation).title("My Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(newLocation));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(newLocation));
         Log.d("mytag",lat+" "+lng);
     }
 
