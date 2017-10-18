@@ -28,12 +28,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,LocationListener,DialogInterface.OnClickListener{
 
     private GoogleMap mMap;
     private LocationManager locationManager;
+    private LatLng mNowLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mMap.addMarker(new MarkerOptions().position(tokyo).title("Marker on nowPlace"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tokyo));
         mMap.setMinZoomPreference(12f);
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener(){
+
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                return false;
+            }
+        });
 
         setMarkerOnTheMap(tokyo,createBitmap());
     }
@@ -120,7 +131,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-
     public void setMarkerOnTheMap(LatLng _latLng,Bitmap _bitmap){
         //LatLng latLng = new LatLng(35.689634, 139.692101);
         MarkerOptions markerOptions =new MarkerOptions();
@@ -128,7 +138,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(_bitmap);
         mMap.addMarker(new MarkerOptions().position(_latLng).title("test").icon(bitmapDescriptor));
     }
-
 
     public Bitmap createBitmap() {
 
@@ -155,9 +164,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onLocationChanged(Location location) {
         double lat = location.getLatitude();
         double lng = location.getLongitude();
-        LatLng newLocation = new LatLng(lat, lng);
-        mMap.addMarker(new MarkerOptions().position(newLocation).title("My Location"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(newLocation));
+        mNowLatLng = new LatLng(lat, lng);
+        mMap.addMarker(new MarkerOptions().position(mNowLatLng).title("My Location"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(mNowLatLng));
         Log.d("mytag",lat+" "+lng);
     }
 
@@ -185,4 +194,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
 }
