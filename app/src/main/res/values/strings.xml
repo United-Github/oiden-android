@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">oiden</string>
+    <string name="app_name">おいでん</string>
+    <string name="test_name">おいでん　太郎</string>
+    <string name="test_message">もしもし、聞こえますか\n今、あなたの脳内に直接語りかけています</string>
 </resources>
