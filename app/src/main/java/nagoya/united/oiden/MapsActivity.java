@@ -11,13 +11,17 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +32,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,LocationListener,DialogInterface.OnClickListener{
+public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,LocationListener,DialogInterface.OnClickListener{
 
     private GoogleMap mMap;
     private LocationManager locationManager;
+    private LatLng mNowLatLng;
+    private double mMarkerSizeMag = 0.75;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +79,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mMap.addMarker(new MarkerOptions().position(tokyo).title("Marker on nowPlace"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tokyo));
         mMap.setMinZoomPreference(12f);
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener(){
+        //マーカークリック時の処理
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                return false;
+            }
+        });
 
         setMarkerOnTheMap(tokyo,createBitmap());
     }
@@ -120,23 +136,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-
     public void setMarkerOnTheMap(LatLng _latLng,Bitmap _bitmap){
         //LatLng latLng = new LatLng(35.689634, 139.692101);
         MarkerOptions markerOptions =new MarkerOptions();
         //Bitmap bitmap = createBitmap();
-        final BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(_bitmap);
-        mMap.addMarker(new MarkerOptions().position(_latLng).title("test").icon(bitmapDescriptor));
+        int newWidth = (int)(_bitmap.getWidth()*mMarkerSizeMag);
+        int newHeight = (int)(_bitmap.getHeight()*mMarkerSizeMag);
+        Bitmap resizeBitmap = Bitmap.createScaledBitmap(_bitmap,newWidth,newHeight,false);
+        final BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(resizeBitmap);
+        mMap.addMarker(new MarkerOptions().position(_latLng).icon(bitmapDescriptor));
     }
-
 
     public Bitmap createBitmap() {
 
         // ビューを生成
         // 例として、TextViewに動的にテキストを入れる
         View v = LayoutInflater.from(this).inflate(R.layout.map_item, null);
-        TextView tv = (TextView)v.findViewById(R.id.text110);
-        tv.setText("ここに動的にテキストを入れる");
+        //TextView tv = (TextView)v.findViewById(R.id.mapMessage);
+        //tv.setText("ここに動的にテキストを入れる");
 
         // 画面内に配置してないので、measureを読んでからBitmapに書き込む
         if (v.getMeasuredHeight() <= 0) {
@@ -151,13 +168,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return null;
     }
 
+
+    //カメラの移動用関数
+    public void moveCameraOnTheMap(LatLng latLng){
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+    }
+
     @Override
     public void onLocationChanged(Location location) {
         double lat = location.getLatitude();
         double lng = location.getLongitude();
-        LatLng newLocation = new LatLng(lat, lng);
-        mMap.addMarker(new MarkerOptions().position(newLocation).title("My Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(newLocation));
+        mNowLatLng = new LatLng(lat, lng);
+        mMap.addMarker(new MarkerOptions().position(mNowLatLng).title("My Location"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(mNowLatLng));
         Log.d("mytag",lat+" "+lng);
     }
 
@@ -185,4 +208,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
 }
