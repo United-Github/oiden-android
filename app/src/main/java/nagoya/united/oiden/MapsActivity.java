@@ -1,11 +1,16 @@
 package nagoya.united.oiden;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -43,6 +48,7 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
     private LatLng mNowLatLng = new LatLng(35.689634, 139.692101);
     private double mMarkerSizeMag = 0.75;
     private Marker mMarker = null;
+    private Marker mSearchMarker = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +74,31 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
             mMarker.remove();
         }
         mMarker = mMap.addMarker(new MarkerOptions().position(mNowLatLng).title("My Location"));
+    }
+
+    @Override
+    protected void searchPlace(String string) {
+        Geocoder geocoder = new Geocoder(this,Locale.getDefault());
+        List<Address> lstAddr;
+        try {
+            lstAddr = geocoder.getFromLocationName(string,1);
+            Address addr = lstAddr.get(0);
+            double lat = addr.getLatitude();
+            double lng = addr.getLongitude();
+            LatLng latLng = new LatLng(lat,lng);
+
+            if(mSearchMarker!=null){
+                mSearchMarker.remove();
+            }
+            mSearchMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Find Location")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+            moveCameraOnTheMap(latLng);
+            Log.d("mytag",latLng.latitude+" "+latLng.longitude);
+            return;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

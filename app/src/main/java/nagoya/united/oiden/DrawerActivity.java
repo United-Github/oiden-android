@@ -50,12 +50,13 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
         } else if (id == R.id.drawer_search) {
             final EditText editText = new EditText(this);
             new AlertDialog.Builder(this)
-                    .setTitle("住所検索")
+                    .setTitle("住所または郵便番号検索")
                     .setView(editText)
                     .setPositiveButton("検索", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            editText.getText().toString();
+                            String string = editText.getText().toString();
+                            searchPlace(string);
                         }
                     })
                 .setNegativeButton("中止", new DialogInterface.OnClickListener() {
@@ -76,4 +77,5 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
     }
 
     protected abstract void onClickMyLocation();
+    protected abstract void searchPlace(String string);
 }
