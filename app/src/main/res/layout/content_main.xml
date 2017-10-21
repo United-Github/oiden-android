@@ -24,26 +24,45 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:weightSum="8"
+        android:weightSum="12"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_weight="8"
             android:background="#FFFFFF"
             android:ems="10"
             android:hint="Message"
             android:inputType="textPersonName"
             android:text="Name" />
-
-        <Button
-            android:id="@+id/button3"
+        <LinearLayout
+            android:gravity="center"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="ここ" />
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/select_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_image"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/send_message"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_menu_send"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>
