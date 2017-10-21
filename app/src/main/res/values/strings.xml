@@ -3,4 +3,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="test_name">おいでん　太郎</string>
     <string name="test_message">もしもし、聞こえますか\n今、あなたの脳内に直接語りかけています</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
