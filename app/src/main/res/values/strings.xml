@@ -5,6 +5,11 @@
     <string name="test_message">もしもし、聞こえますか\n今、あなたの脳内に直接語りかけています</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="drawer_title_my_location">現在地</string>
+    <string name="drawer_title_account">アカウント</string>
+    <string name="drawer_title_system">システム</string>
+    <string name="drawer_title_timeline">タイムライン</string>
+    <string name="drawer_title_search">住所検索</string>
 
     <string name="action_settings">Settings</string>
 </resources>

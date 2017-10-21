@@ -1,6 +1,7 @@
 package nagoya.united.oiden;
 
 import android.app.Application;
+import android.content.DialogInterface;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -8,12 +9,14 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.EditText;
 
-public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public abstract class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +42,31 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.drawer_my_location) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            this.onClickMyLocation();
+        } else if (id == R.id.drawer_timeline) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.drawer_search) {
+            final EditText editText = new EditText(this);
+            new AlertDialog.Builder(this)
+                    .setTitle("住所検索")
+                    .setView(editText)
+                    .setPositiveButton("検索", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            editText.getText().toString();
+                        }
+                    })
+                .setNegativeButton("中止", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .show();
+        } else if (id == R.id.drawer_account) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.drawer_system) {
 
         }
 
@@ -57,4 +74,6 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    protected abstract void onClickMyLocation();
 }
