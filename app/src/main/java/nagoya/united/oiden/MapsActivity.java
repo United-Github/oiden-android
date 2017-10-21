@@ -41,6 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private LocationManager locationManager;
     private LatLng mNowLatLng;
+    private double mMarkerSizeMag = 0.75;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +140,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //LatLng latLng = new LatLng(35.689634, 139.692101);
         MarkerOptions markerOptions =new MarkerOptions();
         //Bitmap bitmap = createBitmap();
-        Bitmap resizeBitmap = Bitmap.createScaledBitmap(_bitmap,_bitmap.getWidth(),_bitmap.getHeight(),false);
-        final BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(_bitmap);
+        int newWidth = (int)(_bitmap.getWidth()*mMarkerSizeMag);
+        int newHeight = (int)(_bitmap.getHeight()*mMarkerSizeMag);
+        Bitmap resizeBitmap = Bitmap.createScaledBitmap(_bitmap,newWidth,newHeight,false);
+        final BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(resizeBitmap);
         mMap.addMarker(new MarkerOptions().position(_latLng).icon(bitmapDescriptor));
     }
 
