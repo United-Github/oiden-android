@@ -11,13 +11,17 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMinZoomPreference(12f);
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener(){
-
+        //マーカークリック時の処理
             @Override
             public boolean onMarkerClick(Marker marker) {
                 return false;
@@ -136,7 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions =new MarkerOptions();
         //Bitmap bitmap = createBitmap();
         final BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(_bitmap);
-        mMap.addMarker(new MarkerOptions().position(_latLng).title("test").icon(bitmapDescriptor));
+        mMap.addMarker(new MarkerOptions().position(_latLng).icon(bitmapDescriptor));
     }
 
     public Bitmap createBitmap() {
@@ -144,8 +148,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // ビューを生成
         // 例として、TextViewに動的にテキストを入れる
         View v = LayoutInflater.from(this).inflate(R.layout.map_item, null);
-        TextView tv = (TextView)v.findViewById(R.id.message);
-        tv.setText("ここに動的にテキストを入れる");
+        //TextView tv = (TextView)v.findViewById(R.id.mapMessage);
+        //tv.setText("ここに動的にテキストを入れる");
 
         // 画面内に配置してないので、measureを読んでからBitmapに書き込む
         if (v.getMeasuredHeight() <= 0) {
