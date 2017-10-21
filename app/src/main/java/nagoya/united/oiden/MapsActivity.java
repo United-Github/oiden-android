@@ -36,7 +36,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,LocationListener,DialogInterface.OnClickListener{
+public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,LocationListener,DialogInterface.OnClickListener{
 
     private GoogleMap mMap;
     private LocationManager locationManager;
