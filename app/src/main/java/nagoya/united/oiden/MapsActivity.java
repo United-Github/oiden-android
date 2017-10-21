@@ -43,10 +43,10 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
 
     private GoogleMap mMap;
     private LocationManager locationManager;
-    private LatLng mNowLatLng;
+    private LatLng mNowLatLng = new LatLng(35.689634, 139.692101);
     private double mMarkerSizeMag = 0.75;
     private MapInputFormManager mapInputFormManager;
-
+    private Marker mMarker = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +63,15 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
             locationStart();
         }
 
+    }
+
+    @Override
+    protected void onClickMyLocation() {
+        moveCameraOnTheMap(mNowLatLng);
+        if(mMarker != null){
+            mMarker.remove();
+        }
+        mMarker = mMap.addMarker(new MarkerOptions().position(mNowLatLng).title("My Location"));
     }
 
 
@@ -184,7 +193,7 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
         double lat = location.getLatitude();
         double lng = location.getLongitude();
         mNowLatLng = new LatLng(lat, lng);
-        mMap.addMarker(new MarkerOptions().position(mNowLatLng).title("My Location"));
+        mMarker = mMap.addMarker(new MarkerOptions().position(mNowLatLng).title("My Location"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(mNowLatLng));
         Log.d("mytag",lat+" "+lng);
     }
