@@ -139,6 +139,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //LatLng latLng = new LatLng(35.689634, 139.692101);
         MarkerOptions markerOptions =new MarkerOptions();
         //Bitmap bitmap = createBitmap();
+        Bitmap resizeBitmap = Bitmap.createScaledBitmap(_bitmap,_bitmap.getWidth(),_bitmap.getHeight(),false);
         final BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(_bitmap);
         mMap.addMarker(new MarkerOptions().position(_latLng).icon(bitmapDescriptor));
     }
@@ -162,6 +163,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         Log.d("mytag","return_null");
         return null;
+    }
+
+
+    //カメラの移動用関数
+    public void moveCameraOnTheMap(LatLng latLng){
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
     @Override

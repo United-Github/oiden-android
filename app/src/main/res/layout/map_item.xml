@@ -24,8 +24,9 @@
             android:id="@+id/mapAccountID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
             android:text="TextView"
-            android:textSize="9sp"/>
+            android:textSize="16sp" />
     </LinearLayout>
 
     <TextView
@@ -35,7 +36,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:textSize="9sp"
-        android:text="テストテキスト出力中です。エラーに置きお付けください。この文章が読めた場合プログラムが正常に動いてない場合があります"/>
+        android:text="テストテキスト出力中です。エラーに置きお付けください。この文章が読めた場合プログラムが正常に動いてない場合があります"
+        android:textSize="16sp" />
 
 </LinearLayout>
