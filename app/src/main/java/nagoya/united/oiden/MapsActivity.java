@@ -14,6 +14,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.Image;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,12 +43,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
+
 public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,LocationListener,DialogInterface.OnClickListener{
 
     private GoogleMap mMap;
     private LocationManager locationManager;
     private LatLng mNowLatLng = new LatLng(35.689634, 139.692101);
     private double mMarkerSizeMag = 0.75;
+    private MapInputFormManager mapInputFormManager;
     private Marker mMarker = null;
     private Marker mSearchMarker = null;
 
@@ -54,6 +58,7 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        mapInputFormManager = new MapInputFormManager(this);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -250,4 +255,15 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mapInputFormManager != null) {
+            switch (requestCode) {
+                case MapInputFormManager.SELECT_IMAGE_REQUEST_CODE :
+                    mapInputFormManager.onSelectImage(data);
+                    return;
+            }
+        }
+    }
 }
