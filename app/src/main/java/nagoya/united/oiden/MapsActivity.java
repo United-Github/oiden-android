@@ -20,6 +20,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -74,11 +75,11 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
 
     @Override
     protected void onClickMyLocation() {
-        moveCameraOnTheMap(mNowLatLng);
-        if(mMarker != null){
+        if(mMarker!=null){
             mMarker.remove();
         }
-        mMarker = mMap.addMarker(new MarkerOptions().position(mNowLatLng).title("My Location"));
+        mMarker = mMap.addMarker(new MarkerOptions().position(mNowLatLng).title("Now Location"));
+        moveCameraOnTheMap(mNowLatLng);
     }
 
     @Override
@@ -97,13 +98,20 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
             }
             mSearchMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Find Location")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
             moveCameraOnTheMap(latLng);
             Log.d("mytag",latLng.latitude+" "+latLng.longitude);
             return;
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void popTimeline() {
+        TimeLineFragment timeLineFragment = new TimeLineFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.container, timeLineFragment);
+        transaction.commit();
     }
 
 
@@ -161,7 +169,7 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
             return;
         }
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 50, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
     }
 
     @Override
@@ -225,7 +233,7 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
         double lat = location.getLatitude();
         double lng = location.getLongitude();
         mNowLatLng = new LatLng(lat, lng);
-        mMarker = mMap.addMarker(new MarkerOptions().position(mNowLatLng).title("My Location"));
+        //mMarker = mMap.addMarker(new MarkerOptions().position(mNowLatLng).title("My Location"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(mNowLatLng));
         Log.d("mytag",lat+" "+lng);
     }

@@ -46,7 +46,7 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
             // Handle the camera action
             this.onClickMyLocation();
         } else if (id == R.id.drawer_timeline) {
-
+            this.popTimeline();
         } else if (id == R.id.drawer_search) {
             final EditText editText = new EditText(this);
             new AlertDialog.Builder(this)
@@ -78,4 +78,5 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
 
     protected abstract void onClickMyLocation();
     protected abstract void searchPlace(String string);
+    protected abstract void popTimeline();
 }
