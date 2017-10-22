@@ -14,7 +14,7 @@ import java.util.List;
  * Created by takato on 2017/10/22.
  */
 
-public class ListAdapter extends ArrayAdapter<Tweet> {
+public class ListAdapter extends ArrayAdapter<Tweet> {//カスタムビューのためのアダプターここからいじることは特にないと思います
     private int mResource;
     private List<Tweet> mItems;
     private LayoutInflater mInflater;

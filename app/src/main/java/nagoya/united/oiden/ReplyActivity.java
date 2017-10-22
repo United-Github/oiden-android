@@ -30,12 +30,12 @@ public class ReplyActivity extends AppCompatActivity {
         ListView listView = (ListView)findViewById(R.id.listView);
         ArrayList<Tweet> listItems = new ArrayList<>();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {//ここで返信の内容を追加できればここで返信を読み込んだりしたい
             Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);  // 今回はサンプルなのでデフォルトのAndroid Iconを利用
             Tweet tweet = new Tweet();
-            tweet.setIcon(bmp);
-            tweet.setName("watasi");
-            tweet.setTweet("gaaa");
+            tweet.setIcon(bmp);//アイコン
+            tweet.setName("watasi");//名前
+            tweet.setTweet("gaaa");//ツイート内容
             listItems.add(tweet);
         }
 
@@ -58,7 +58,7 @@ public class ReplyActivity extends AppCompatActivity {
                     .input("ヒント", "初期値", new MaterialDialog.InputCallback() {
                         @Override
                         public void onInput(MaterialDialog dialog, CharSequence input) {
-                            Toast.makeText(ReplyActivity.this, input, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ReplyActivity.this, input, Toast.LENGTH_SHORT).show();//ここで返信入力後の処理
                         }
                     }).show();
         }

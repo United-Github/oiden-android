@@ -102,9 +102,9 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
             public boolean onMarkerClick(Marker marker) {
                 View view;
                 Bitmap test= BitmapFactory.decodeResource(getResources(), R.drawable.ic_account);
-                if(OpenDetailKoko.Show(test,"ああああ","ああああああああああああああああああ",MapsActivity.this)) {//暫定
+                if(OpenDetailKoko.Show(test,"ああああ","ああああああああああああああああああ",MapsActivity.this)) {//アイコン、名前、投稿内容、コンテキスト
                     Intent intent = new Intent(MapsActivity.this, ReplyActivity.class);
-                    startActivity(intent);
+                    startActivity(intent);//クラス内で遷移は無理なためこちらで
                 }
                 return false;
             }
