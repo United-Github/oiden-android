@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/listIcon"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@mipmap/ic_launcher"/>
+            android:background="@mipmap/ic_launcher" />
+
         <TextView
             android:id="@+id/listId"
-            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="@string/test_name"/>
+            android:layout_gravity="center_vertical"
+            android:text="@string/test_name"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:id="@+id/timeline_date"
@@ -71,50 +75,56 @@
         android:id="@+id/listContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/test_message"/>
+        android:text="@string/test_message"
+        android:textSize="20sp" />
+
     <ImageView
         android:id="@+id/listImage"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
 
         android:weightSum="3">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center">
+
             <ImageButton
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/ic_send_message"/>
+                android:background="@drawable/ic_send_message" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            >
+            android:gravity="center">
+
             <ImageButton
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/ic_send_like"/>
+                android:background="@drawable/ic_send_like" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            >
+            android:gravity="center">
+
             <ImageButton
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/ic_on_location"/>
+                android:background="@drawable/ic_on_location" />
         </LinearLayout>
     </LinearLayout>
 
