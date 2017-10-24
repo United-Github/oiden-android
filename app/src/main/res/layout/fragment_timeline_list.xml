@@ -10,4 +10,5 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="nagoya.united.oiden.TimeLineFragment"
-    tools:listitem="@layout/fragment_timeline" />
+    tools:listitem="@layout/fragment_timeline"
+    android:background="#FFFFFF"/>

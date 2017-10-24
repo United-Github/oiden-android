@@ -1,6 +1,7 @@
 package nagoya.united.oiden;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import android.Manifest;
@@ -49,7 +50,7 @@ import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import nagoya.united.oiden.model.KokoViewItemModel;
 
 
-public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,LocationListener,DialogInterface.OnClickListener{
+public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,LocationListener,DialogInterface.OnClickListener,TimeLineFragment.OnListFragmentInteractionListener{
 
     private GoogleMap mMap;
     private LocationManager locationManager;
@@ -58,7 +59,7 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
     private MapInputFormManager mapInputFormManager;
     private Marker mMarker = null;
     private Marker mSearchMarker = null;
-
+    private TimeLineFragment timeLineFragment = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,14 +113,11 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
 
     @Override
     protected void popTimeline() {
-        /*
-        List< KokoViewItemModel> kokoList = new List<KokoViewItemModel>();
         TimeLineFragment timeLineFragment = new TimeLineFragment();
-        MyTimeLineRecyclerViewAdapter timeLineList= new MyTimeLineRecyclerViewAdapter(kokoList,);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.container, MyTimeLineRecyclerViewAdapter);
+        transaction.add(R.id.container, timeLineFragment);
         transaction.commit();
-        */
+
     }
 
 
@@ -287,5 +285,10 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
                     return;
             }
         }
+    }
+
+    @Override
+    public void onListFragmentInteraction(KokoViewItemModel item) {
+
     }
 }

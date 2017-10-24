@@ -1,6 +1,8 @@
 package nagoya.united.oiden;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,12 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import nagoya.united.oiden.dummy.DummyContent;
 import nagoya.united.oiden.dummy.DummyContent.DummyItem;
+//import nagoya.united.oiden.model.KokoContent;
 import nagoya.united.oiden.model.KokoViewItemModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 /**
  * A fragment representing a list of Items.
@@ -70,7 +76,17 @@ public class TimeLineFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            //recyclerView.setAdapter(new MyTimeLineRecyclerViewAdapter(KokoViewItemModel.ITEMS, mListener));
+            List<KokoViewItemModel> kokoList = new ArrayList<KokoViewItemModel>();
+
+            KokoViewItemModel temp = new KokoViewItemModel();
+            temp.userName = "asd";
+            temp.userIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_menu_camera);;
+            temp.sumLike = 5;
+            temp.created = new Date();
+            temp.content="aaaaaaaaaaaaaa";
+            kokoList.add(temp);
+
+            recyclerView.setAdapter(new MyTimeLineRecyclerViewAdapter(kokoList, mListener));
         }
         return view;
     }
@@ -82,8 +98,10 @@ public class TimeLineFragment extends Fragment {
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
         } else {
+
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
+
         }
     }
 

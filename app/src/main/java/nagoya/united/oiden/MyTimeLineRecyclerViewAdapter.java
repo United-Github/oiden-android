@@ -43,12 +43,11 @@ public class MyTimeLineRecyclerViewAdapter extends RecyclerView.Adapter<MyTimeLi
         holder.mItem = mValues.get(position);
         //holder.mIdView.setText(mValues.get(position).id);
         holder.mUserNameView.setText(mValues.get(position).userName);
-        holder.mSumLikeView.setText(mValues.get(position).sumLike);
+        holder.mSumLikeView.setText(Integer.toString(mValues.get(position).sumLike));
         holder.mContentView.setText(mValues.get(position).content);
-        String tempDate = new String();
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"), Locale.JAPAN);
         calendar.setTime(mValues.get(position).created);
-        tempDate = calendar.get(Calendar.YEAR)+"/"+calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DATE);
+        String tempDate = calendar.get(Calendar.YEAR)+"/"+calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DATE);
         holder.mCreateDate.setText(tempDate);
         holder.mUserIcon.setImageBitmap(mValues.get(position).userIcon);
 
