@@ -130,6 +130,11 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
         }
     }
 
+    @Override
+    protected void accountSetting() {
+
+    }
+
 
     /**
      * Manipulates the map once available.

@@ -66,7 +66,7 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
                 })
                 .show();
         } else if (id == R.id.drawer_account) {
-
+            accountSetting();
         } else if (id == R.id.drawer_system) {
 
         }
@@ -79,4 +79,5 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
     protected abstract void onClickMyLocation();
     protected abstract void searchPlace(String string);
     protected abstract void popTimeline();
+    protected abstract void accountSetting();
 }
