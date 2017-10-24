@@ -59,7 +59,9 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
     private MapInputFormManager mapInputFormManager;
     private Marker mMarker = null;
     private Marker mSearchMarker = null;
-    private boolean mTimeLineFragment = false;
+    private boolean mTimeLineFlag = false;
+
+    private TimeLineFragment timeLineFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,14 +115,18 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
 
     @Override
     protected void popTimeline() {
-        if(mTimeLineFragment){
-
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if(mTimeLineFlag){
+            transaction.remove(timeLineFragment).commit();
+            //transaction.commit();
+            mTimeLineFlag=false;
         }
         else {
-            TimeLineFragment timeLineFragment = new TimeLineFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            timeLineFragment = new TimeLineFragment();
+
             transaction.add(R.id.container, timeLineFragment);
             transaction.commit();
+            mTimeLineFlag=true;
         }
     }
 
