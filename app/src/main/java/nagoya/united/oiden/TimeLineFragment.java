@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import nagoya.united.oiden.dummy.DummyContent;
 import nagoya.united.oiden.dummy.DummyContent.DummyItem;
+import nagoya.united.oiden.model.KokoViewItemModel;
 
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class TimeLineFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyTimeLineRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            //recyclerView.setAdapter(new MyTimeLineRecyclerViewAdapter(KokoViewItemModel.ITEMS, mListener));
         }
         return view;
     }
@@ -104,6 +105,6 @@ public class TimeLineFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(KokoViewItemModel item);
     }
 }

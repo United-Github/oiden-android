@@ -44,6 +44,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
+import nagoya.united.oiden.model.KokoViewItemModel;
+
 
 public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,LocationListener,DialogInterface.OnClickListener{
 
@@ -108,10 +110,14 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
 
     @Override
     protected void popTimeline() {
+        /*
+        List< KokoViewItemModel> kokoList = new List<KokoViewItemModel>();
         TimeLineFragment timeLineFragment = new TimeLineFragment();
+        MyTimeLineRecyclerViewAdapter timeLineList= new MyTimeLineRecyclerViewAdapter(kokoList,);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.container, timeLineFragment);
+        transaction.add(R.id.container, MyTimeLineRecyclerViewAdapter);
         transaction.commit();
+        */
     }
 
 
