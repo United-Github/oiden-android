@@ -1,9 +1,12 @@
 package nagoya.united.oiden;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.text.InputType;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -15,44 +18,43 @@ import com.afollestad.materialdialogs.Theme;
  */
 
 public class OpenDetailKoko {
-    public static void Show(Bitmap icon, String username, String content, Context context) {
-        new MaterialDialog.Builder(context)//ここでgetApplicationContextするとボタンのコンテキストを受け取ってしまうため
-                .title("つぶやき")//たぶん人名
-                .content("あれこれ")//ここにタッチした投稿の内容をいれてください
-                .positiveText("返信")
-                .iconRes(R.mipmap.ic_launcher)//アイコン
-                .theme(Theme.DARK)//テーマの設定。お好みでどうぞ
-                .onPositive(new MaterialDialog.SingleButtonCallback(){
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which){//返信の文面
-                        new MaterialDialog.Builder(context)//ここでgetApplicationContextするとボタンのコンテキストを受け取ってしまうため
-                                .title("タイトル")//人名？
-                                .content("内容")//ここに返信する投稿の内容を入れてほしい
-                                .iconRes(R.mipmap.ic_launcher)//アイコン
-                                .inputType(InputType.TYPE_CLASS_TEXT)
-                                .input("返信", "", (dialog1, input) -> {
-                                    Toast.makeText(context, input, Toast.LENGTH_SHORT).show();//ここでデータ送信
-                                }).show();
-                    }
-                })
-                .negativeText("つけたし")
-                .onNegative(new MaterialDialog.SingleButtonCallback(){
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which){//付け足しの文面
-                        new MaterialDialog.Builder(context)//ここでgetApplicationContextするとボタンのコンテキストを受け取ってしまうため
-                                .title("タイトル")
-                                .content("内容")//上と同じく付け足しする内容をいれてほしい
-                                .iconRes(R.mipmap.ic_launcher)//アイコン
-                                .inputType(InputType.TYPE_CLASS_TEXT)
-                                .input("つけたし", "", new MaterialDialog.InputCallback() {
-                                    @Override
-                                    public void onInput(MaterialDialog dialog, CharSequence input) {
-                                        Toast.makeText(context, input, Toast.LENGTH_SHORT).show();//ここでデータ送信
-                                    }
-                                }).show();
-                    }
-                })
-                .neutralText("キャンセル")//デザイン的に付け足しと返信を横に並べたかった
+        static boolean shift=false;
+    public static boolean Show(Bitmap icon, String username, String content, Context context) {
+
+        boolean wrapInScrollView = true;//地図上の吹き出しタッチ時のポップアップ画面
+       MaterialDialog dialog=new MaterialDialog.Builder(context)//ここでgetApplicationContextするとボタンのコンテキストを受け取ってしまうため
+                .title("つぶやき")
+                .negativeText("キャンセル")
+                .customView(R.layout.custom_view,wrapInScrollView)
                 .show();
+        View view=dialog.getCustomView();
+        ImageButton mes;
+        ImageButton like;
+        ImageButton pos;
+        Context mcontext=context;
+        mes=(ImageButton)view.findViewById(R.id.mes);//吹き出しボタン
+        mes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(mcontext,ReplyActivity.class);
+//                startActivity(intent);
+                shift=true;//ここで画面の遷移のためのフラグをセット
+            }
+        });
+        like=(ImageButton)view.findViewById(R.id.like);//イイねボタン
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ここにイイね後の処理を記述
+            }
+        });
+        pos=(ImageButton)view.findViewById(R.id.pos);//ロケーションボタン
+        pos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ここに入力後を記述
+            }
+        });
+        return shift;
     }
 }

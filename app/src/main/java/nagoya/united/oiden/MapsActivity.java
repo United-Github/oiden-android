@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.location.Address;
 import android.location.Geocoder;
@@ -30,6 +31,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -144,6 +146,12 @@ public class MapsActivity extends DrawerActivity implements OnMapReadyCallback,L
         //マーカークリック時の処理
             @Override
             public boolean onMarkerClick(Marker marker) {
+                View view;
+                Bitmap test= BitmapFactory.decodeResource(getResources(), R.drawable.ic_account);
+                if(OpenDetailKoko.Show(test,"ああああ","ああああああああああああああああああ",MapsActivity.this)) {//アイコン、名前、投稿内容、コンテキスト
+                    Intent intent = new Intent(MapsActivity.this, ReplyActivity.class);
+                    startActivity(intent);//クラス内で遷移は無理なためこちらで
+                }
                 return false;
             }
         });
