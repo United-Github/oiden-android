@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public abstract class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -66,7 +67,10 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
                 })
                 .show();
         } else if (id == R.id.drawer_account) {
-            accountSetting();
+            final ImageButton imageButton = new ImageButton(this);
+            final EditText editText = new EditText(this);
+            new AlertDialog.Builder(this).setTitle("アカウント名・アカウントアイコン変更");
+
         } else if (id == R.id.drawer_system) {
 
         }
@@ -79,5 +83,4 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
     protected abstract void onClickMyLocation();
     protected abstract void searchPlace(String string);
     protected abstract void popTimeline();
-    protected abstract void accountSetting();
 }
